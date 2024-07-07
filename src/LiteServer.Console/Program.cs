@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ConsoleLog = System.Console;
+
 namespace LiteServer.Console
 {
     internal class Program
@@ -12,6 +14,7 @@ namespace LiteServer.Console
         {
             var server = new Server();
             server.Start();
+            ConsoleLog.ReadKey();
         }
     }
 }
