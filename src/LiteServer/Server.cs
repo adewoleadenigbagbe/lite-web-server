@@ -6,13 +6,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Sockets;
 using System.Runtime.CompilerServices;
+using System.Diagnostics;
+using System.Threading;
 
 namespace LiteServer
 {
     public class Server
     {
-        private readonly HttpListener _listener = new HttpListener();
         private const int _port = 3022;
+        private const int _maxSimultaneousConnections = 200;
+        private readonly HttpListener _listener = new HttpListener();
+        private readonly Semaphore _semaphore = new Semaphore(_maxSimultaneousConnections, _maxSimultaneousConnections);
+
         public void Start()
         {
             _listener.Prefixes.Add("http://localhost" +":" +_port +"/");
@@ -29,10 +34,21 @@ namespace LiteServer
             }
 
             _listener.Start();
+            Console.WriteLine("Server is currently listening on port:" + _port);
 
-            Console.WriteLine("Server is currently listening in port:" + _port);
+            while (true)
+            {
+                _semaphore.WaitOne();
+                ProcessRequest();
+            }
+
 
             //_listener.Abort();
+        }
+
+        private void Stop()
+        {
+            _listener.Stop();
         }
 
         private static IEnumerable<string> GetHostIps()
@@ -44,6 +60,25 @@ namespace LiteServer
             {
                 yield return ipAddress.ToString();
             }
+        }
+
+        private async void ProcessRequest()
+        {
+           var _stopWatch = new Stopwatch();
+           var requestContext = await _listener.GetContextAsync();
+
+            _stopWatch.Start();
+            var buffer = Encoding.ASCII.GetBytes("Hi there from the web server");
+            requestContext.Response.StatusCode = (int)HttpStatusCode.OK;
+            requestContext.Response.ContentType = "text/plain";
+            requestContext.Response.OutputStream.Write(buffer, 0, buffer.Length);
+            requestContext.Response.OutputStream.Close();
+
+            _stopWatch.Stop();
+
+            _semaphore.Release();
+
+            Console.WriteLine("Request was executed in {0} Milliseconds",_stopWatch.ElapsedMilliseconds);
         }
     }
 }
