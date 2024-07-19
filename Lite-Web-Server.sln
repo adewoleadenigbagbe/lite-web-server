@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiteServer", "src\LiteServe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiteServer.Console", "src\LiteServer.Console\LiteServer.Console.csproj", "{E8234C4E-A014-4A43-95CD-32D0DACE6413}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiteServer.Http", "src\LiteServer.Http\LiteServer.Http.csproj", "{16F89915-3860-4F5B-BD0F-AE6C66CAD06A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiteServer.Api", "src\LiteServer.Api\LiteServer.Api.csproj", "{00F1FEC3-B69A-48A0-8C7A-B04EF49D6853}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,8 +25,19 @@ Global
 		{E8234C4E-A014-4A43-95CD-32D0DACE6413}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8234C4E-A014-4A43-95CD-32D0DACE6413}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8234C4E-A014-4A43-95CD-32D0DACE6413}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16F89915-3860-4F5B-BD0F-AE6C66CAD06A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16F89915-3860-4F5B-BD0F-AE6C66CAD06A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16F89915-3860-4F5B-BD0F-AE6C66CAD06A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16F89915-3860-4F5B-BD0F-AE6C66CAD06A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00F1FEC3-B69A-48A0-8C7A-B04EF49D6853}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00F1FEC3-B69A-48A0-8C7A-B04EF49D6853}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00F1FEC3-B69A-48A0-8C7A-B04EF49D6853}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00F1FEC3-B69A-48A0-8C7A-B04EF49D6853}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9E39E5C8-481B-464B-8CD7-F8F630A7186A}
 	EndGlobalSection
 EndGlobal

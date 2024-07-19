@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C35D5CEF-ABB2-4EDB-AB1C-E7CF51B6F739}</ProjectGuid>
+    <ProjectGuid>{16F89915-3860-4F5B-BD0F-AE6C66CAD06A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LiteServer</RootNamespace>
-    <AssemblyName>LiteServer</AssemblyName>
+    <RootNamespace>LiteServer.Http</RootNamespace>
+    <AssemblyName>LiteServer.Http</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,15 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Router.cs" />
-    <Compile Include="Server.cs" />
+    <Compile Include="ActionMethod.cs" />
+    <Compile Include="ApiControllerBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\LiteServer.Http\LiteServer.Http.csproj">
-      <Project>{16f89915-3860-4f5b-bd0f-ae6c66cad06a}</Project>
-      <Name>LiteServer.Http</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
