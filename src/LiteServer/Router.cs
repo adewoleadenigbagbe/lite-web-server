@@ -30,10 +30,10 @@ namespace LiteServer
 
         public ActionMethod GetActionMethod((string,string) key)
         {
-            if (_table.TryGetValue(key, out var actionMethod)){
-                return actionMethod;
+            if (!_table.TryGetValue(key, out var actionMethod)){
+                throw new KeyNotFoundException();
             }
-            throw new KeyNotFoundException();
+            return actionMethod;
         }
     }
 
@@ -45,9 +45,9 @@ namespace LiteServer
         private string _controllerName;
         private object responseValue;
         private Type responseType;
-        private Func<object[], object> responseFunc;
+        private Func<object[], object> actionFunc;
         private IList<MethodParameter> parameterCollection;
-        private IList<Attribute> actionAttribute;
+        private IList<Attribute> actionAttributes;
     }
 
     public class MethodParameter
@@ -69,7 +69,6 @@ namespace LiteServer
 
     public class ModelState
     {
-
     } 
 
 }
