@@ -30,16 +30,4 @@ namespace LiteServer.Http
         private int order { get; set; }
     }
 
-    public class ControllerContext
-    {
-        private HttpListenerRequest _request;
-        private HttpListenerResponse _response;
-        private Uri _uri;
-        private ModelState _modelState;
-    }
-
-    public class ModelState
-    {
-    }
-
 }

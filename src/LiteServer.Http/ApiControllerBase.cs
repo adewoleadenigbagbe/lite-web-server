@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace LiteServer.Http
 {
-    public class ApiControllerBase
+    public abstract class ApiControllerBase
     {
-
     }
 }

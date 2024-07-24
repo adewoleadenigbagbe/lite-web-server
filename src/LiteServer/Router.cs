@@ -10,32 +10,56 @@ using System.Net.Http;
 using System.Net;
 
 using LiteServer.Http;
+using System.Text.RegularExpressions;
+using System.Runtime.CompilerServices;
 
 namespace LiteServer
 {
     public class RouterManager
     {
-        private readonly RouteTable routeTable;
+        private readonly IList<Route> _routes;
 
-        public RouterManager()
+        public RouterManager(IList<Route> routes)
         {
-        }
-    }
-
-    public class RouteTable
-    {
-        private readonly ConcurrentDictionary<(string, string), ActionMethod> _table = new ConcurrentDictionary<(string, string), ActionMethod>();
-
-        public RouteTable()
-        {
+           _routes = routes;
         }
 
-        public ActionMethod GetActionMethod((string,string) key)
+
+        public Route PickRoute(string url, HttpMethod httpMethod)
         {
-            if (!_table.TryGetValue(key, out var actionMethod)){
-                throw new KeyNotFoundException();
+            foreach (var route in _routes)
+            {
+                if(!Regex.IsMatch(url, route.Pattern))
+                {
+                    continue;
+                }
+
+                if(route.HttpMethod == httpMethod)
+                {
+                    return route;
+                }
             }
-            return actionMethod;
+
+            return null;
         }
     }
+
+    public class Route
+    {
+        private string _actionName;
+        private string _controllerName;
+
+        public HttpMethod HttpMethod { get; }
+
+        public string Pattern { get;}
+
+        public Route(string actionName, string controllerName, string pattern, HttpMethod httpMethod)
+        {
+           _actionName = actionName;
+           _controllerName = controllerName;
+           Pattern = pattern;
+           HttpMethod = httpMethod;
+        }
+    }
+
 }
