@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Router.cs" />
+    <Compile Include="Route.cs" />
+    <Compile Include="RouteCollection.cs" />
+    <Compile Include="RouteManager.cs" />
     <Compile Include="Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

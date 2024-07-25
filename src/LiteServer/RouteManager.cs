@@ -12,14 +12,15 @@ using System.Net;
 using LiteServer.Http;
 using System.Text.RegularExpressions;
 using System.Runtime.CompilerServices;
+using System.Collections;
 
 namespace LiteServer
 {
-    public class RouterManager
+    internal class RouterManager
     {
-        private readonly IList<Route> _routes;
+        private readonly RouteCollection _routes;
 
-        public RouterManager(IList<Route> routes)
+        public RouterManager(RouteCollection routes)
         {
            _routes = routes;
         }
@@ -34,7 +35,7 @@ namespace LiteServer
                     continue;
                 }
 
-                if(route.HttpMethod == httpMethod)
+                if(route.HttpMethod.Method == httpMethod.Method)
                 {
                     return route;
                 }
@@ -43,23 +44,4 @@ namespace LiteServer
             return null;
         }
     }
-
-    public class Route
-    {
-        private string _actionName;
-        private string _controllerName;
-
-        public HttpMethod HttpMethod { get; }
-
-        public string Pattern { get;}
-
-        public Route(string actionName, string controllerName, string pattern, HttpMethod httpMethod)
-        {
-           _actionName = actionName;
-           _controllerName = controllerName;
-           Pattern = pattern;
-           HttpMethod = httpMethod;
-        }
-    }
-
 }

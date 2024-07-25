@@ -44,6 +44,7 @@
     <Compile Include="ActionContext.cs" />
     <Compile Include="ActionMethod.cs" />
     <Compile Include="ApiControllerBase.cs" />
+    <Compile Include="Attributes\ActionMethodAttribute.cs" />
     <Compile Include="Attributes\HttpHeadAttribute.cs" />
     <Compile Include="Attributes\RouteAttribute.cs" />
     <Compile Include="Attributes\RouteBaseAttribute.cs" />

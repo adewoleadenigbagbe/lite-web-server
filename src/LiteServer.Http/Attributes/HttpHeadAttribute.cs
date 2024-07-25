@@ -7,37 +7,37 @@ using System.Threading.Tasks;
 namespace LiteServer.Http.Attributes
 {
     [AttributeUsage(AttributeTargets.Method,AllowMultiple = false, Inherited =false)]
-    public sealed class HttpGetAttribute : Attribute
+    public sealed class HttpGetAttribute : ActionMethodAttribute
     {
     }
 
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
-    public sealed class HttpPostAttribute : Attribute
+    public sealed class HttpPostAttribute : ActionMethodAttribute
     {
     }
 
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
-    public sealed class HttpPutAttribute : Attribute
+    public sealed class HttpPutAttribute : ActionMethodAttribute
     {
     }
 
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
-    public sealed class HttpDeleteAttribute : Attribute
+    public sealed class HttpDeleteAttribute : ActionMethodAttribute
     {
     }
 
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
-    public sealed class HttpHeadAttribute : Attribute
+    public sealed class HttpHeadAttribute : ActionMethodAttribute
     {
     }
 
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
-    public sealed class HttpOptionsAttribute : Attribute
+    public sealed class HttpOptionsAttribute : ActionMethodAttribute
     {
     }
 
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
-    public sealed class HttpPatchAttribute : Attribute
+    public sealed class HttpPatchAttribute : ActionMethodAttribute
     {
     }
 }
