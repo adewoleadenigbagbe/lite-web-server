@@ -13,11 +13,11 @@ namespace LiteServer
 
         private string _controllerName;
 
-        public HttpMethod HttpMethod { get; }
+        public string HttpMethod { get; }
 
         public string Pattern { get; }
 
-        public Route(string actionName, string controllerName, string pattern, HttpMethod httpMethod)
+        public Route(string actionName, string controllerName, string pattern, string httpMethod)
         {
             _actionName = actionName;
             _controllerName = controllerName;

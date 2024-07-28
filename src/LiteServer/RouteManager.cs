@@ -20,11 +20,14 @@ namespace LiteServer
     {
         private readonly RouteCollection _routes;
 
+        public RouterManager() : this(new RouteCollection())
+        {
+        }
+
         public RouterManager(RouteCollection routes)
         {
            _routes = routes;
         }
-
 
         public Route PickRoute(string url, HttpMethod httpMethod)
         {
@@ -35,7 +38,7 @@ namespace LiteServer
                     continue;
                 }
 
-                if(route.HttpMethod.Method == httpMethod.Method)
+                if(route.HttpMethod == httpMethod.Method)
                 {
                     return route;
                 }

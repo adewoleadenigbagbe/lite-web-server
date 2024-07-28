@@ -8,6 +8,10 @@ using System.Net.Sockets;
 using System.Runtime.CompilerServices;
 using System.Diagnostics;
 using System.Threading;
+using System.Reflection;
+using LiteServer.Http;
+using LiteServer.Http.Attributes;
+using System.CodeDom;
 
 namespace LiteServer
 {
@@ -17,9 +21,14 @@ namespace LiteServer
         private const int _maxSimultaneousConnections = 200;
         private readonly HttpListener _listener = new HttpListener();
         private readonly Semaphore _semaphore = new Semaphore(_maxSimultaneousConnections, _maxSimultaneousConnections);
+        private readonly RouterManager _routeManager = new RouterManager();
 
         public void Start()
         {
+            //load up the route first
+
+
+
             _listener.Prefixes.Add("http://localhost" +":" +_port +"/");
 
             var hostIps = GetHostIps();
@@ -79,6 +88,33 @@ namespace LiteServer
             _semaphore.Release();
 
             Console.WriteLine("Request was executed in {0} Milliseconds",_stopWatch.ElapsedMilliseconds);
+        }
+
+        public void Load()
+        {
+            var controllerBaseType = typeof(ApiControllerBase);
+            var controllerAssembly = Assembly.GetAssembly(controllerBaseType);
+
+             var controlleractionlist = controllerAssembly.GetTypes()
+            .Where(type => type.IsAssignableFrom(controllerBaseType) && type.GetCustomAttributes().Any(x => x is RouteBaseAttribute))
+            .SelectMany(type => type.GetMethods(BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.Public))
+            .Where(methodInfo => methodInfo.GetCustomAttributes().Any(x => x is RouteAttribute && x is ActionMethodAttribute))
+            //.Select(x => new { 
+            //    Controller = x.DeclaringType.Name, 
+            //    Action = x.Name,
+            //    HttpMethod = x.GetCustomAttribute<ActionMethodAttribute>().Method,
+            //    //ReturnType = x.ReturnType.Name, 
+            //    //Attributes = String.Join(",", x.GetCustomAttributes().Select(a => a.GetType().Name.Replace("Attribute", ""))) 
+            //})
+            .Select(x => new {
+                            Controller = x.DeclaringType.Name,
+                            Action = x.Name,
+                            HttpMethod = x.GetCustomAttribute<ActionMethodAttribute>().Method,
+                            //ReturnType = x.ReturnType.Name, 
+                            //Attributes = String.Join(",", x.GetCustomAttributes().Select(a => a.GetType().Name.Replace("Attribute", ""))) 
+            })
+            .OrderBy(x => x.Controller)
+            .ThenBy(x => x.Action).ToList();
         }
     }
 }

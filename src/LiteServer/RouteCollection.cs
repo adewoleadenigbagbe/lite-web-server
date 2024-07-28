@@ -39,6 +39,5 @@ namespace LiteServer
         {
             _routes.AddRange(routes);
         }
-
     }
 }

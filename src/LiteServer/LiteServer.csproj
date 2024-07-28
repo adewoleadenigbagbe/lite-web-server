@@ -48,6 +48,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LiteServer.Api\LiteServer.Api.csproj">
+      <Project>{00f1fec3-b69a-48a0-8c7a-b04ef49d6853}</Project>
+      <Name>LiteServer.Api</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LiteServer.Http\LiteServer.Http.csproj">
       <Project>{16f89915-3860-4f5b-bd0f-ae6c66cad06a}</Project>
       <Name>LiteServer.Http</Name>

@@ -8,5 +8,6 @@ namespace LiteServer.Http.Attributes
 {
     public abstract class ActionMethodAttribute : Attribute
     {
+        public abstract string Method { get; }
     }
 }
