@@ -51,7 +51,7 @@ namespace LiteServer
            .Where(methodInfo => methodInfo.GetCustomAttributes().Any(x => x is RouteAttribute && x is ActionMethodAttribute))
            .Select(x =>
            {
-               var pattern = ExtractParams(x.DeclaringType.GetCustomAttribute<RouteBaseAttribute>().Name + '/' + x.DeclaringType.GetCustomAttribute<RouteAttribute>().Name);
+               var pattern = BuildRegex(x.DeclaringType.GetCustomAttribute<RouteBaseAttribute>().Name + '/' + x.DeclaringType.GetCustomAttribute<RouteAttribute>().Name);
                var method = x.GetCustomAttribute<ActionMethodAttribute>().Method;
                var route = new Route(x.Name, x.DeclaringType.Name, pattern, method);
                return route;
@@ -85,7 +85,7 @@ namespace LiteServer
         //api/v1/product/123/search/Dave
         //api/v1/product/{id}/search/{name}
         //api/v1/product/{id:int}/search/{name}
-        private string ExtractParams(string input)
+        public string BuildRegex(string input)
         {
             if (input == null || input == string.Empty)
             {
