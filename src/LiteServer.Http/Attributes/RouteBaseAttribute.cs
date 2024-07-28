@@ -9,10 +9,10 @@ namespace LiteServer.Http.Attributes
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
     public sealed class RouteBaseAttribute : Attribute
     {
-        private string _name;
+        public string Name { get; }
         public RouteBaseAttribute(string name)
         { 
-            _name = name;
+            Name = name;
         }
     }
 }

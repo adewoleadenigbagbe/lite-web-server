@@ -26,8 +26,7 @@ namespace LiteServer
         public void Start()
         {
             //load up the route first
-
-
+            Load();
 
             _listener.Prefixes.Add("http://localhost" +":" +_port +"/");
 
@@ -90,31 +89,5 @@ namespace LiteServer
             Console.WriteLine("Request was executed in {0} Milliseconds",_stopWatch.ElapsedMilliseconds);
         }
 
-        public void Load()
-        {
-            var controllerBaseType = typeof(ApiControllerBase);
-            var controllerAssembly = Assembly.GetAssembly(controllerBaseType);
-
-             var controlleractionlist = controllerAssembly.GetTypes()
-            .Where(type => type.IsAssignableFrom(controllerBaseType) && type.GetCustomAttributes().Any(x => x is RouteBaseAttribute))
-            .SelectMany(type => type.GetMethods(BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.Public))
-            .Where(methodInfo => methodInfo.GetCustomAttributes().Any(x => x is RouteAttribute && x is ActionMethodAttribute))
-            //.Select(x => new { 
-            //    Controller = x.DeclaringType.Name, 
-            //    Action = x.Name,
-            //    HttpMethod = x.GetCustomAttribute<ActionMethodAttribute>().Method,
-            //    //ReturnType = x.ReturnType.Name, 
-            //    //Attributes = String.Join(",", x.GetCustomAttributes().Select(a => a.GetType().Name.Replace("Attribute", ""))) 
-            //})
-            .Select(x => new {
-                            Controller = x.DeclaringType.Name,
-                            Action = x.Name,
-                            HttpMethod = x.GetCustomAttribute<ActionMethodAttribute>().Method,
-                            //ReturnType = x.ReturnType.Name, 
-                            //Attributes = String.Join(",", x.GetCustomAttributes().Select(a => a.GetType().Name.Replace("Attribute", ""))) 
-            })
-            .OrderBy(x => x.Controller)
-            .ThenBy(x => x.Action).ToList();
-        }
     }
 }

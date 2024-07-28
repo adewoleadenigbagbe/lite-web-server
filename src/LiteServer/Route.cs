@@ -9,9 +9,9 @@ namespace LiteServer
 {
     internal class Route
     {
-        private string _actionName;
+        public string ActionName { get; }
 
-        private string _controllerName;
+        public string ControllerName { get; }
 
         public string HttpMethod { get; }
 
@@ -19,8 +19,8 @@ namespace LiteServer
 
         public Route(string actionName, string controllerName, string pattern, string httpMethod)
         {
-            _actionName = actionName;
-            _controllerName = controllerName;
+            ActionName = actionName;
+            ControllerName = controllerName;
             Pattern = pattern;
             HttpMethod = httpMethod;
         }
