@@ -24,7 +24,8 @@ namespace LiteServer
         Int,
         String,
         Bool,
-        Float
+        Float,
+        Object
     }
 
     internal class RouterManager
@@ -93,7 +94,7 @@ namespace LiteServer
             }
 
             input = input.Trim();
-            int startIndex = 0;
+            int startIndex = -1;
 
             var strBuilder = new StringBuilder();
             strBuilder.Append('^');
@@ -138,7 +139,7 @@ namespace LiteServer
                     }
                 }
 
-                else
+                else if(startIndex == -1)
                 {
                     strBuilder.Append(input[i]);
                 }

@@ -19,14 +19,16 @@ namespace LiteServer
     {
         private const int _port = 3022;
         private const int _maxSimultaneousConnections = 200;
-        private readonly HttpListener _listener = new HttpListener();
+
         private readonly Semaphore _semaphore = new Semaphore(_maxSimultaneousConnections, _maxSimultaneousConnections);
+
+        private readonly HttpListener _listener = new HttpListener();
         private readonly RouterManager _routeManager = new RouterManager();
 
         public void Start()
         {
             //load up the route first
-            Load();
+            _routeManager.LoadRoute();
 
             _listener.Prefixes.Add("http://localhost" +":" +_port +"/");
 
