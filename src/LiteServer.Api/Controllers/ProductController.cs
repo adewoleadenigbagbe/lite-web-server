@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 
 namespace LiteServer.Api.Controllers
 {
-    [RouteBase("api/v1/products")]
+    [ApiVersion("1.0")]
+    [RouteBase("api/v{version:apiversion}/products")]
     public class ProductController : ApiControllerBase
     {
         [HttpGet]
